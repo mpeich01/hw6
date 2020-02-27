@@ -1,0 +1,165 @@
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Lottery</title>
+    <style>
+        p {
+            font-size: medium;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>
+        Lottery numbers:
+        <p id="Unsorted Nums"> Unsorted lottery numbers: </p>
+        <p id="Sorted Nums"> Sorted lottery numbers: </p>
+        <p id="LB"> Luckyball: </p>
+    </h1>
+    <div style="padding-top: 20px; padding-bottom: 20px;">
+        <h2> Enter your numbers seperated by a commas. </h2>
+        <input type="text" placeholder="your numbers..." id="input">
+        <input type="text" placeholder="Lucky Ball..." id="LBinput">
+
+        <button type="button" onclick="compare();">Get Value</button>
+    </div>
+
+    <a href="Amnicable_numbers.html">part2
+    <script>
+        var numsix;
+        var fivenums = init();
+        while (true) {
+            rand = RndNum(1, 18); //get sixth number 
+            if (fivenums.indexOf(rand) === -1) { // if value of random is not in array
+                numsix = rand; // make the sixth number the random value
+                break;
+            }
+        }
+
+        fivenums.forEach(element => {
+            document.getElementById("Unsorted Nums").innerHTML += element + ", ";
+        });
+        document.getElementById("Unsorted Nums").innerHTML += numsix;
+        //getting the sixth number:
+
+        fivenums.sort(function(a, b) {
+            return a - b
+        });
+
+        fivenums.forEach(element => {
+            document.getElementById("Sorted Nums").innerHTML += element + ", ";
+        });
+        document.getElementById("Sorted Nums").innerHTML += numsix;
+
+        document.getElementById("LB").innerHTML += numsix;
+
+        //funcs 
+        function init() {
+            fivenums = [];
+            for (i = 0; i < 5; i++) {
+
+                var rand = RndNum(1, 48);
+                if (fivenums.indexOf(rand) === -1) //make sure there's no repeats
+                    fivenums[i] = rand;
+                else
+                    i--;
+            }
+            return fivenums;
+        }
+
+        function RndNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function compare() {
+            var inputVal = document.getElementById("input").value;
+            var arr = inputVal.split(",");
+            for (var i = 0; i < arr.length; i++) {
+                arr[i] = parseInt(arr[i], 10); //turn values into array
+            }
+            var lb;
+            var counter = 0;
+            arr.forEach(element => {
+                if (fivenums.indexOf(element) !== -1) { // if the current userinput value is in the other array, 
+                    counter++;
+                }
+            });
+            var LBnum = document.getElementById("LBinput").value;
+            var LBarr = LBnum.split(" ");
+            for (var i = 0; i < LBarr.length; i++) {
+                LBarr[i] = parseInt(LBarr[i], 10); //turn values into array
+                if (LBarr.indexOf(numsix) !== -1) { // if the LB value is inputted , 
+                    lb = true;
+                }
+            }
+            switch (counter) {
+                case 0:
+                    if (lb) {
+                        alert("You got the Luckyball! you win $4")
+                        break;
+                    }
+                    alert("You didn't match any numbers!");
+                    break;
+
+                case 1:
+                    if (lb) {
+                        alert("You got the Luckyball and 1 number! you win $6");
+                        break;
+                    }
+                    alert("You matched 1 number! payout not mentioned :(");
+                    break;
+
+                case 2:
+                    if (lb) {
+                        alert("You got the Luckyball and 2 numbers! you win $25");
+                        break;
+                    }
+                    alert("You matched 2 numbers! you win $3");
+                case 3:
+                    if (lb) {
+                        alert("You got the Luckyball and 3 numbers! you win $150");
+                        break;
+                    }
+                    alert("You matched 3 numbers! you win $20");
+                    break;
+                case 4:
+                    if (lb) {
+                        alert("You got the Luckyball and 4 numbers! you win $5000");
+                        break;
+                    }
+                    alert("You matched 4 numbers! you win $200");
+                    break;
+                case 5:
+                    if (arr.length > 5) {
+                        alert("you entered too many numbers! try again");
+                        break;
+                    }
+
+                    if (lb) {
+                        alert("You got the Luckyball and 5 numbers! you win $7,000 a week for life!");
+                        break;
+                    }
+                    alert("You matched 5 numbers! you win $25,000 a YEAR for LIFE!");
+                    break;
+                default:
+                    alert("you entered too many numbers! try again");
+                    break;
+
+
+
+            }
+
+        }
+    </script>
+
+
+</body>
+
+
+
+
+
+</html>
