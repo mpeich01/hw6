@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Part 2</title>
+    <style>
+        p {
+            font-size: medium;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding-top: 20px; padding-bottom: 20px;">
+        <h2> Enter your numbers seperated by a commas. </h2>
+        <input type="text" placeholder="num1..." id="num1">
+        <input type="text" placeholder="num2..." id="num2">
+        <button type="button" onclick="compare();">Check</button>
+
+        <p id="factor1"></p>
+        <p id="factor2"> </p>
+        <p id="amni"></p>
+    </div>
+    <a href="lottery.html">part 1</a>
+    <script>
+        //functions
+        //  Create some test code to test the function.
+        /*
+        if (isFactor(4, 2)) {
+            alert("HI!");
+        } else
+        j = 0;
+        for (var i = 0; i < 30; i++) {
+            if (isFactor(i, j))
+                alert(j + " is a factor of " + i);
+            j++
+        }
+            alert("BYE!");
+        j = 1
+        for (var i = 0; i < 30; i++) {
+            if (!isFactor(i, j))
+                alert(j + "DOES NOT DIVIDE EVENLY INTO " + i);
+            j *= 2
+        }
+        */
+
+        function isFactor(num, tNum) {
+            if (num % tNum === 0)
+                return true;
+        }
+        /* The array for this test was continously modified
+          var arr = [1, 2, 3, 4, 5, 6, 7, 8, 90, "bob", [12, 34, "george"]];
+          showFactors(arr); 
+          */
+        function showFactors(arr) {
+            arr.forEach(element => {
+                document.getElementById("factors").innerHTML += element + "  ";
+            });
+        }
+        /*
+         The values for this test were continously modified
+        var sum = 0;
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 90, 5608383];
+        sum = addFactors(arr);
+        alert(sum);
+         */
+
+        function addFactors(arr) {
+            var sum = 0;
+            arr.forEach(element => {
+                sum += element
+            });
+            return sum;
+        }
+        /*
+        test code for getfactor
+        arr = [];
+        arr = getFactors(284);
+        arr.forEach(element => {
+            document.getElementById("factors").innerHTML += element + "  ";
+        });
+
+        arr = [];
+        arr = getFactors(220);
+        arr.forEach(element => {
+            document.getElementById("factors").innerHTML += element + "  ";
+        });
+
+        arr = [];
+        arr = getFactors(2);
+        arr.forEach(element => {
+            document.getElementById("factors").innerHTML += element + "  ";
+        });
+
+        arr = [];
+        arr = getFactors(17494);
+        arr.forEach(element => {
+            document.getElementById("factors").innerHTML += element + "  ";
+        });
+        */
+
+        function getFactors(num) {
+            var arr = [];
+            for (var i = 0; i < num; i++) {
+                if (isFactor(num, i))
+                    arr.push(i);
+            }
+            return arr
+        }
+
+        function compare() {
+            var num1 = document.getElementById("num1").value;
+            var num2 = document.getElementById("num2").value;
+            var sum1 = 0;
+            var sum2 = 0;
+
+            arr = getFactors(num1);
+            document.getElementById("factor1").innerHTML = "Factors of first number: ";
+            arr.forEach(element => {
+                document.getElementById("factor1").innerHTML += element + "  ";
+            });
+            sum1 = addFactors(arr);
+
+            //num 2
+            arr = getFactors(num2);
+            document.getElementById("factor2").innerHTML = "Factors of second number: ";
+
+            arr.forEach(element => {
+                document.getElementById("factor2").innerHTML += element + "  ";
+            });
+            sum2 = addFactors(arr);
+            if ((sum1 == num2) && (sum2 == num1)) {
+                document.getElementById("amni").innerHTML = "these numbers are amnicable"
+            } else
+                document.getElementById("amni").innerHTML = "these numbers not are amnicable"
+
+        }
+    </script>
+</body>
+
+</html>
